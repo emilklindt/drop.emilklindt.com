@@ -382,19 +382,12 @@ class PeersManager {
                 this.peers[peer.id].refresh();
                 return;
             }
-            this.closeQrWindow();
             if (window.isRtcSupported && peer.rtcSupported) {
                 this.peers[peer.id] = new RTCPeer(this._server, peer.id);
             } else {
                 this.peers[peer.id] = new WSPeer(this._server, peer.id);
             }
         })
-    }
-
-    closeQrWindow() {
-        if (window.location.hash === '#qr') {
-            window.location.hash = '';
-        }
     }
 
     sendTo(peerId, message) {
@@ -517,6 +510,11 @@ class Events {
     }
 }
 
+Events.on('peer-joined', function () {
+    if (window.location.hash === "#qr") {
+          window.location.hash = "";
+    }
+});
 
 RTCPeer.config = {
     'sdpSemantics': 'unified-plan',
