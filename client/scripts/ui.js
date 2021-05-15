@@ -616,6 +616,11 @@ Events.on('load', () => {
     animate();
 });
 
+Events.on('load', () => {
+    const url = window.location.origin;
+    document.getElementById('qr-img').src = `https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=${url}&chld=H|1&choe=UTF-8`;
+});
+
 Notifications.PERMISSION_ERROR = `
 Notifications permission has been blocked
 as the user has dismissed the permission prompt several times.
